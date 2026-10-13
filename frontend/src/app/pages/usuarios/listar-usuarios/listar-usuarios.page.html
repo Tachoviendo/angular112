@@ -1,1 +1,42 @@
-<p>listar-usuarios works!</p>
+<div>
+  <h1>Usuarios</h1>
+  <a routerLink="/usuarios/crear">Crear usuario</a>
+</div>
+
+@if (usuarios.hasValue()) {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Nombre completo</th>
+        <th>Fecha de nacimiento</th>
+        <th>Grupos</th>
+        <th>Activo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (usuario of usuarios.value(); track usuario.id_usuario) {
+        <tr>
+          <td>{{ usuario.id_usuario }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.nombre_completo }}</td>
+          <td>{{ usuario.fecha_nacimiento }}</td>
+          <td>{{ usuario.grupos.join(', ') }}</td>
+          <td>{{ usuario.activo ? 'Sí' : 'No' }}</td>
+          <td class="acciones">
+            <a [routerLink]="['/usuarios', usuario.id_usuario]">Editar</a>
+            <button type="button" (click)="borrar(usuario.id_usuario)">Borrar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">No hay usuarios.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p>Cargando...</p>
+}

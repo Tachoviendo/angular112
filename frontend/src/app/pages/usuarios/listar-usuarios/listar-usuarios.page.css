@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+th {
+  background-color: lightblue;
+  border: 1px solid black;
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.acciones button {
+  margin-left: 10px;
+}
