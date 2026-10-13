@@ -46,7 +46,9 @@ class UsuariosRepository {
   }
 
   async crear(dto: CrearUsuarioType): Promise<Usuario> {
-    await myPool.query("BEGIN");
+    // La transacción tiene que ir en un mismo client: con myPool.query cada query puede ir por otra conexión
+    const client = await myPool.connect();
+    await client.query("BEGIN");
 
     try {
       const queryUsuario = `
@@ -60,23 +62,25 @@ class UsuariosRepository {
         VALUES ($1, crypt($2, gen_salt('bf')));
       `;
 
-      const resultUsuario = await myPool.query(queryUsuario, [
+      const resultUsuario = await client.query(queryUsuario, [
         dto.username,
         dto.nombres,
         dto.apellidos,
         dto.fecha_nacimiento,
         dto.grupos,
       ]);
-      await myPool.query(queryCredenciales, [
+      await client.query(queryCredenciales, [
         resultUsuario.rows[0].id_usuario,
         dto.password,
       ]);
-      await myPool.query("COMMIT");
+      await client.query("COMMIT");
 
       return this.obtenerPorId(resultUsuario.rows[0].id_usuario);
     } catch (error) {
-      await myPool.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw error;
+    } finally {
+      client.release();
     }
   }
 

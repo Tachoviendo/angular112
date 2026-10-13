@@ -40,7 +40,7 @@ export function transformarErrorPostgres(error: PostgresError) {
   // "table": "pedido_productos",
   // "constraint": "pedio_productos_producto_fk",
   const elementoProblematico = constraint
-    ?.substring(table?.length || 0)
+    ?.substring(table ? table.length + 1 : 0)
     .toLowerCase()
     .replace("_fk", "")
     .replace("_key", "")

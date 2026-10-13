@@ -87,10 +87,11 @@ class TareasRepository {
   }
 
   async finalizar(idTarea: number, fecha?: string): Promise<Tarea> {
+    // Sin fecha se usa la hora actual; solo se manda $2 si se usa en la query
     let terminadaValor = "CURRENT_TIMESTAMP";
-    const params = [idTarea];
+    const params: (number | string)[] = [idTarea];
     if (fecha) {
-      params.push();
+      params.push(fecha);
       terminadaValor = "$2";
     }
     const query = `
@@ -99,7 +100,7 @@ class TareasRepository {
       WHERE id_tarea = $1 AND terminada IS NULL;
     `;
 
-    await myPool.query(query, [idTarea, fecha]);
+    await myPool.query(query, params);
     return this.obtenerPorId(idTarea);
   }
 

@@ -2,11 +2,10 @@ import { Type } from "@sinclair/typebox";
 import type { Static } from "@sinclair/typebox";
 
 // Igual que la tabla usuarios de db/00.sql
-export const Grupo = Type.Union([
-  Type.Literal("user"),
-  Type.Literal("admin"),
-  Type.Literal("superadmin"),
-]);
+// Unsafe + enum para que el error de validación sea claro y swagger muestre las opciones
+export const Grupo = Type.Unsafe<"user" | "admin" | "superadmin">(
+  Type.String({ enum: ["user", "admin", "superadmin"] }),
+);
 
 export const Usuario = Type.Object({
   id_usuario: Type.Integer(),

@@ -2,7 +2,7 @@ import fastifyPlugin from "fastify-plugin";
 import fastifyJwt from "@fastify/jwt";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
-import { UnAuthenticatedError } from "../errors/response.errors.ts";
+import { NotAuthorizedError, UnAuthenticatedError } from "../errors/response.errors.ts";
 
 export default fastifyPlugin(async function jwtPlugin(fastify) {
   const secret = process.env.FASTIFY_SECRET;
@@ -17,11 +17,20 @@ export default fastifyPlugin(async function jwtPlugin(fastify) {
       throw new UnAuthenticatedError("Token inválido o vencido.");
     }
   });
+
+  // Va después de authenticate, porque usa request.user
+  fastify.decorate("verificarAdmin", async function (request: FastifyRequest) {
+    const { grupos } = request.user;
+    if (!grupos.includes("admin") && !grupos.includes("superadmin")) {
+      throw new NotAuthorizedError("Se necesita ser admin.");
+    }
+  });
 });
 
 declare module "fastify" {
   interface FastifyInstance {
     authenticate(request: FastifyRequest, reply: FastifyReply): Promise<void>;
+    verificarAdmin(request: FastifyRequest, reply: FastifyReply): Promise<void>;
   }
 }
 
