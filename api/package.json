@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API RESTful de usuarios y tareas con Fastify y Swagger",
+  "main": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/server.ts",
+    "start": "node --env-file=.env src/server.ts",
+    "db:up": "docker compose --env-file .env up -d",
+    "db:down": "docker compose --env-file .env down"
+  },
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.3.0",
+      "onFail": "download"
+    }
+  },
+  "dependencies": {
+    "@fastify/error": "^4.2.1",
+    "@fastify/jwt": "^10.2.4",
+    "@fastify/swagger": "^9.9.2",
+    "@fastify/swagger-ui": "^6.1.2",
+    "@sinclair/typebox": "^0.34.52",
+    "fastify": "^5.12.5",
+    "fastify-plugin": "^6.0.1",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1"
+  }
+}
