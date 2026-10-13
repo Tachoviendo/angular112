@@ -1,1 +1,57 @@
-<p>usuario-form works!</p>
+<form (submit)="enviar($event)">
+  <p>
+    <label>Username</label><br />
+    <input type="text" [formField]="formulario.username" />
+    @if (formulario.username().touched()) {
+      @for (error of formulario.username().errors(); track error.kind) {
+        <span class="error">{{ error.message }}</span>
+      }
+    }
+  </p>
+
+  <p>
+    <label>Nombres</label><br />
+    <input type="text" [formField]="formulario.nombres" />
+    @if (formulario.nombres().touched()) {
+      @for (error of formulario.nombres().errors(); track error.kind) {
+        <span class="error">{{ error.message }}</span>
+      }
+    }
+  </p>
+
+  <p>
+    <label>Apellidos</label><br />
+    <input type="text" [formField]="formulario.apellidos" />
+    @if (formulario.apellidos().touched()) {
+      @for (error of formulario.apellidos().errors(); track error.kind) {
+        <span class="error">{{ error.message }}</span>
+      }
+    }
+  </p>
+
+  <p>
+    <label>Fecha de nacimiento</label><br />
+    <input type="date" [formField]="formulario.fecha_nacimiento" />
+    @if (formulario.fecha_nacimiento().touched()) {
+      @for (error of formulario.fecha_nacimiento().errors(); track error.kind) {
+        <span class="error">{{ error.message }}</span>
+      }
+    }
+  </p>
+
+  <p>
+    <label>Grupos</label><br />
+    <input type="checkbox" [formField]="formulario.user" /> user
+    <input type="checkbox" [formField]="formulario.admin" /> admin
+    <input type="checkbox" [formField]="formulario.superadmin" /> superadmin
+    @for (error of formulario.user().errors(); track error.kind) {
+      <span class="error">{{ error.message }}</span>
+    }
+  </p>
+
+  <p>
+    <input type="checkbox" [formField]="formulario.activo" /> Activo
+  </p>
+
+  <button type="submit">Guardar</button>
+</form>

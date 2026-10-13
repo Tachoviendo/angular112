@@ -1,0 +1,18 @@
+form {
+  background-color: white;
+  border: 3px solid darkblue;
+  padding: 10px;
+  width: 400px;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 300px;
+  border: 1px solid gray;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  display: block;
+}

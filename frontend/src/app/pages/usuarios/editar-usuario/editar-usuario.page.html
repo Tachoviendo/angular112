@@ -1,1 +1,11 @@
-<p>editar-usuario works!</p>
+<h1>Editar usuario</h1>
+
+<a routerLink="/usuarios">Volver</a>
+
+@if (usuario.isLoading()) {
+  <p>Cargando...</p>
+} @else if (usuario.value(); as u) {
+  <app-usuario-form [usuario]="u" (guardar)="actualizar($event)" />
+} @else {
+  <p>No existe el usuario {{ idUsuario() }}.</p>
+}
