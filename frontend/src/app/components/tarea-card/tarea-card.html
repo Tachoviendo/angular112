@@ -1,14 +1,57 @@
-<div class="card" [class.cerrada]="tarea().estado === 'Cerrada'">
-  <h3>{{ tarea().titulo }}</h3>
-  <p>{{ tarea().descripcion }}</p>
-  <p><b>Grupo:</b> {{ tarea().grupo }}</p>
-  <p><b>Prioridad:</b> {{ prioridadTexto(tarea().prioridad) }}</p>
-  <p><b>Estado:</b> {{ tarea().estado }}</p>
-  <p><b>Creada:</b> {{ tarea().creada | date: 'dd/MM/yyyy HH:mm' }}</p>
-  @if (tarea().terminada) {
-    <p><b>Terminada:</b> {{ tarea().terminada | date: 'dd/MM/yyyy HH:mm' }}</p>
-  }
+@if (editando()) {
+  <form class="card" (submit)="enviar($event)">
+    <p>
+      <label>Título</label><br />
+      <input type="text" [formField]="formulario.titulo" />
+      @if (formulario.titulo().touched()) {
+        @for (error of formulario.titulo().errors(); track error.kind) {
+          <span class="error">{{ error.message }}</span>
+        }
+      }
+    </p>
 
-  <button type="button" (click)="editar.emit(tarea().id_tarea)">Editar</button>
-  <button type="button" (click)="eliminar.emit(tarea().id_tarea)">Eliminar</button>
-</div>
+    <p>
+      <label>Descripción</label><br />
+      <textarea rows="4" [formField]="formulario.descripcion"></textarea>
+    </p>
+
+    <p>
+      <label>Grupo</label><br />
+      <select [formField]="formulario.grupo">
+        <option value="user">user</option>
+        <option value="admin">admin</option>
+        <option value="superadmin">superadmin</option>
+      </select>
+    </p>
+
+    <p>
+      <label>Prioridad</label><br />
+      <select [formField]="formulario.prioridad">
+        <option value="0:baja">baja</option>
+        <option value="1:media">media</option>
+        <option value="2:alta">alta</option>
+      </select>
+    </p>
+
+    <p>
+      <input type="checkbox" [formField]="formulario.terminada" /> Terminada
+    </p>
+
+    <button type="submit">Guardar</button>
+  </form>
+} @else if (tarea(); as t) {
+  <div class="card" [class.cerrada]="t.estado === 'Cerrada'">
+    <h3>{{ t.titulo }}</h3>
+    <p>{{ t.descripcion }}</p>
+    <p><b>Grupo:</b> {{ t.grupo }}</p>
+    <p><b>Prioridad:</b> {{ prioridadTexto(t.prioridad) }}</p>
+    <p><b>Estado:</b> {{ t.estado }}</p>
+    <p><b>Creada:</b> {{ t.creada | date: 'dd/MM/yyyy HH:mm' }}</p>
+    @if (t.terminada) {
+      <p><b>Terminada:</b> {{ t.terminada | date: 'dd/MM/yyyy HH:mm' }}</p>
+    }
+
+    <button type="button" (click)="editar.emit(t.id_tarea)">Editar</button>
+    <button type="button" (click)="eliminar.emit(t.id_tarea)">Eliminar</button>
+  </div>
+}

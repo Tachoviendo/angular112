@@ -15,3 +15,15 @@
 h3 {
   color: darkgreen;
 }
+
+input[type="text"],
+textarea {
+  width: 280px;
+  border: 1px solid gray;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  display: block;
+}

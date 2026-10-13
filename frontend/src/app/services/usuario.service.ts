@@ -1,9 +1,6 @@
 import { Service } from '@angular/core';
 
-import { Usuario } from '../model/usuario';
-
-// Lo que se manda al crear o editar: los campos que calcula la "base" no van
-export type UsuarioDto = Omit<Usuario, 'id_usuario' | 'nombre_completo'>;
+import { Usuario, UsuarioDto } from '../model/usuario';
 
 @Service()
 export class UsuarioService {

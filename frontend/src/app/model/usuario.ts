@@ -11,3 +11,6 @@ export type Usuario = {
   grupos: Grupo[];
   activo: boolean;
 };
+
+// Lo que se manda al crear o editar: los campos que calcula la "base" no van
+export type UsuarioDto = Omit<Usuario, 'id_usuario' | 'nombre_completo'>;

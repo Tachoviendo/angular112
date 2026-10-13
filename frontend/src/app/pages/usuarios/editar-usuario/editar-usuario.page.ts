@@ -2,7 +2,8 @@ import { Component, inject, input, resource } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { UsuarioForm } from '../../../components/usuario-form/usuario-form';
-import { UsuarioDto, UsuarioService } from '../../../services/usuario.service';
+import { UsuarioDto } from '../../../model/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   imports: [UsuarioForm, RouterLink],

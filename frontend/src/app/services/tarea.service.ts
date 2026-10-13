@@ -1,9 +1,6 @@
 import { Service } from '@angular/core';
 
-import { Tarea } from '../model/tarea';
-
-// Lo que se manda al crear o editar: los campos que calcula la "base" no van
-export type TareaDto = Omit<Tarea, 'id_tarea' | 'creada' | 'estado'>;
+import { Tarea, TareaDto } from '../model/tarea';
 
 // Igual que "CURRENT_TIMESTAMP - INTERVAL 'x hours'" del seed
 function haceHoras(horas: number): string {

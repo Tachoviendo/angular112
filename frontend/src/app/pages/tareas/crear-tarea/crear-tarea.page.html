@@ -1,1 +1,5 @@
-<p>crear-tarea works!</p>
+<h1>Crear tarea</h1>
+
+<a routerLink="/tareas">Volver</a>
+
+<app-tarea-card [editando]="true" (guardar)="crear($event)" />

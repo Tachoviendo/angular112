@@ -1,7 +1,7 @@
 import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, maxLength, required, submit, validate } from '@angular/forms/signals';
 
-import { UsuarioDto } from '../../services/usuario.service';
+import { UsuarioDto } from '../../model/usuario';
 
 // Los grupos van como checkboxes, por eso el form tiene un boolean por grupo
 type UsuarioFormModel = {

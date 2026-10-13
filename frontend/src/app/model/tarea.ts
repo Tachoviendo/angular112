@@ -14,3 +14,6 @@ export type Tarea = {
   terminada: string | null;
   estado: 'Abierta' | 'Cerrada';
 };
+
+// Lo que se manda al crear o editar: los campos que calcula la "base" no van
+export type TareaDto = Omit<Tarea, 'id_tarea' | 'creada' | 'estado'>;

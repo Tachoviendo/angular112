@@ -1,1 +1,11 @@
-<p>editar-tarea works!</p>
+<h1>Editar tarea</h1>
+
+<a routerLink="/tareas">Volver</a>
+
+@if (tarea.isLoading()) {
+  <p>Cargando...</p>
+} @else if (tarea.value(); as t) {
+  <app-tarea-card [tarea]="t" [editando]="true" (guardar)="actualizar($event)" />
+} @else {
+  <p>No existe la tarea {{ idTarea() }}.</p>
+}
