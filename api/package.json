@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "node --watch --env-file=.env src/server.ts",
     "start": "node --env-file=.env src/server.ts",
+    "check": "tsc -p .",
     "db:up": "docker compose --env-file .env up -d",
     "db:down": "docker compose --env-file .env down"
   },
@@ -23,6 +24,7 @@
     "@fastify/jwt": "^10.2.4",
     "@fastify/swagger": "^9.9.2",
     "@fastify/swagger-ui": "^6.1.2",
+    "@fastify/type-provider-typebox": "^5.2.0",
     "@sinclair/typebox": "^0.34.52",
     "fastify": "^5.12.5",
     "fastify-plugin": "^6.0.1",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
-    "@types/pg": "^8.23.1"
+    "@types/pg": "^8.23.1",
+    "typescript": "^7.0.2"
   }
 }
