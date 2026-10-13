@@ -1,0 +1,17 @@
+.card {
+  background-color: lightgreen;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.cerrada {
+  background-color: lightgray;
+}
+
+h3 {
+  color: darkgreen;
+}

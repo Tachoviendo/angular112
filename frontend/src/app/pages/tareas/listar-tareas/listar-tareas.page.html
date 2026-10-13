@@ -1,1 +1,14 @@
-<p>listar-tareas works!</p>
+<div>
+  <h1>Tareas</h1>
+  <a routerLink="/tareas/crear">Crear tarea</a>
+</div>
+
+@if (tareas.hasValue()) {
+  @for (tarea of tareas.value(); track tarea.id_tarea) {
+    <app-tarea-card [tarea]="tarea" (editar)="editar($event)" (eliminar)="eliminar($event)" />
+  } @empty {
+    <p>No hay tareas.</p>
+  }
+} @else {
+  <p>Cargando...</p>
+}

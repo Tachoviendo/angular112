@@ -1,1 +1,14 @@
-<p>tarea-card works!</p>
+<div class="card" [class.cerrada]="tarea().estado === 'Cerrada'">
+  <h3>{{ tarea().titulo }}</h3>
+  <p>{{ tarea().descripcion }}</p>
+  <p><b>Grupo:</b> {{ tarea().grupo }}</p>
+  <p><b>Prioridad:</b> {{ prioridadTexto(tarea().prioridad) }}</p>
+  <p><b>Estado:</b> {{ tarea().estado }}</p>
+  <p><b>Creada:</b> {{ tarea().creada | date: 'dd/MM/yyyy HH:mm' }}</p>
+  @if (tarea().terminada) {
+    <p><b>Terminada:</b> {{ tarea().terminada | date: 'dd/MM/yyyy HH:mm' }}</p>
+  }
+
+  <button type="button" (click)="editar.emit(tarea().id_tarea)">Editar</button>
+  <button type="button" (click)="eliminar.emit(tarea().id_tarea)">Eliminar</button>
+</div>
